@@ -1,8 +1,14 @@
 # galago-test-task
 
-## 17.09.2020 — layout
+## 17.09.2020 — start
 ```
 Created vue-cli project.
+```
+
+## 18.09.2020 — upd 0.0.1
+```
+Added vuex;
+Created components MainUsersTable and MainUsersTableButton.
 ```
 
 ## Project setup
