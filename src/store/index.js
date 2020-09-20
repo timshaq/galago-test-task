@@ -11,9 +11,8 @@ export default new Vuex.Store({
       {
         title: 'Дата регистрации',
         sortId: 'registration',
-        smallest: false,
+        smallest: true,
         largest: false,
-        default: true,
       },
       { title: 'ФИО' },
       {
@@ -70,50 +69,52 @@ export default new Vuex.Store({
       const upd = [...context.state.users, { ...user, id }];
       context.commit('updateUsers', upd);
     },
-    sortData(context, id) {
-      const btn = context.state.sortButtons.filter((obj) => obj.sortId === id)[0];
-      if (btn.smallest) {
-        const upd = context.state.sortButtons.map((obj) => {
-          if (obj.sortId === id) {
-            return {
-              ...obj,
-              smallest: false,
-              largest: true,
-            };
-          }
-          return {
-            ...obj,
-            smallest: false,
-            largest: false,
-          };
-        });
-        if (typeof context.state.users[0][id] === 'string') {
-          context.commit('sortDate', { upd, id, sortTo: 1 });
-        } else {
-          context.commit('sortNum', { upd, id, sortTo: 1 });
-        }
-      } else {
-        const upd = context.state.sortButtons.map((obj) => {
-          if (obj.sortId === id) {
-            return {
-              ...obj,
-              smallest: true,
-              largest: false,
-            };
-          }
-          return {
-            ...obj,
-            smallest: false,
-            largest: false,
-          };
-        });
-        if (typeof context.state.users[0][id] === 'string') {
-          context.commit('sortDate', { upd, id, sortTo: 0 });
-        } else {
-          context.commit('sortNum', { upd, id, sortTo: 0 });
-        }
+    updateSort(context) {
+      const buttons = context.state.sortButtons;
+      const countSortBtn = buttons
+        .find((btn) => (btn.smallest === true) || (btn.largest === true));
+      const id = countSortBtn.sortId;
+      switch (id) {
+        case 'date':
+        case 'registration':
+          context.commit('sortDate', { upd: buttons, id, sortTo: !countSortBtn.smallest });
+          break;
+        default:
+          context.commit('sortNum', { upd: buttons, id, sortTo: !countSortBtn.smallest });
+          break;
       }
     },
+    sortData(context, id) {
+      const btn = context.state.sortButtons.find((obj) => obj.sortId === id);
 
+      if (btn.smallest) {
+        btn.smallest = false;
+        btn.largest = true;
+      } else {
+        btn.smallest = true;
+        btn.largest = false;
+      }
+
+      const upd = context.state.sortButtons.map((obj) => {
+        if (obj.sortId === id) {
+          return btn;
+        }
+        return {
+          ...obj,
+          smallest: false,
+          largest: false,
+        };
+      });
+
+      switch (id) {
+        case 'date':
+        case 'registration':
+          context.commit('sortDate', { upd, id, sortTo: !btn.smallest });
+          break;
+        default:
+          context.commit('sortNum', { upd, id, sortTo: !btn.smallest });
+          break;
+      }
+    },
   },
 });

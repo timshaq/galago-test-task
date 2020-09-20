@@ -42,15 +42,22 @@
 
 <script>
 import TableButton from '@/components/MainUsersTableButton.vue';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'MainUsersTable',
+  props: ['users'],
   components: {
     TableButton,
   },
+  methods: {
+    ...mapActions(['updateSort']),
+  },
   computed: {
-    ...mapState(['users', 'sortButtons']),
+    ...mapState(['sortButtons']),
+  },
+  created() {
+    this.updateSort();
   },
 };
 </script>

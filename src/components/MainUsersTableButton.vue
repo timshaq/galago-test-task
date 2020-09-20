@@ -1,5 +1,8 @@
 <template>
-    <button class="btn-sort" type="button" name="button"
+    <button
+    class="btn-sort"
+    type="button"
+    name="button"
     v-if="this.sortId"
     @click.prevent="getSort()"
     :class="{ smallest: this.isSmallest, largest: this.isLargest }">
@@ -39,9 +42,6 @@ export default {
     getSort() {
       this.sortData(this.sortId);
     },
-  },
-  created() {
-    if (this.default) this.getSort();
   },
 };
 </script>

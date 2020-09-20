@@ -65,11 +65,12 @@ export default {
     BaseFormTel,
   },
   methods: {
-    ...mapActions(['addUser']),
+    ...mapActions(['addUser', 'updateSort']),
     sendForm() {
       if (!this.formError.email) {
         this.formData.registration = new Date().toLocaleDateString();
         this.addUser(this.formData);
+        this.updateSort();
         this.formData = {};
       }
     },

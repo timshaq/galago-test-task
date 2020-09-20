@@ -23,6 +23,10 @@ Changed .browserslistrc;
 Added transpiling for vuejs-datepicker at vue.config.js;
 Other minor edits.
 ```
+## 20.09.2020 — upd 0.0.3
+```
+Added component AppPagination.
+```
 
 ## Project setup
 ```
