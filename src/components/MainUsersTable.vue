@@ -18,10 +18,10 @@
           {{ user.registration }}
         </div>
         <div class="item">
-          {{ user.date }}
+          {{ user.name }}
         </div>
         <div class="item">
-          {{ user.name }}
+          {{ user.date }}
         </div>
         <div class="item">
           {{ user.email }}

@@ -11,6 +11,19 @@ Added vuex;
 Created components MainUsersTable and MainUsersTableButton.
 ```
 
+## 20.09.2020 — upd 0.0.2
+```
+Added vue-the-mask and vuejs-datepicker dependencies;
+Created component MainForm;
+Created helper function validMail;
+Created mixin formFieldMixin and components BaseFormField, BaseFormText,
+BaseFormTel, BaseFormSelect, BaseFormDate;
+Added core-js and regenerator-runtime dependencies;
+Changed .browserslistrc;
+Added transpiling for vuejs-datepicker at vue.config.js;
+Other minor edits.
+```
+
 ## Project setup
 ```
 npm install

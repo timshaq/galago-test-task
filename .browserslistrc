@@ -1,3 +1,8 @@
+[production]
 > 1%
-last 2 versions
-not dead
+ie 10
+ie 11
+[development]
+> 1%
+ie 10
+ie 11

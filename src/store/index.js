@@ -15,17 +15,17 @@ export default new Vuex.Store({
         largest: false,
         default: true,
       },
+      { title: 'ФИО' },
       {
         title: 'Дата рождения',
         sortId: 'date',
         smallest: false,
         largest: false,
       },
-      { title: 'ФИО' },
       { title: 'Email' },
       { title: 'Телефон' },
       {
-        title: 'Дистанция',
+        title: 'Дистанция, км',
         sortId: 'distance',
         smallest: false,
         largest: false,
@@ -39,8 +39,8 @@ export default new Vuex.Store({
     ],
   },
   mutations: {
-    updateUsers(state, val) {
-      state.users = val;
+    updateUsers(state, upd) {
+      state.users = upd;
     },
     sortNum(state, { upd, id, sortTo }) {
       const updUsers = state.users.sort((a, b) => a[id] - b[id]);
@@ -65,6 +65,11 @@ export default new Vuex.Store({
 
   },
   actions: {
+    addUser(context, user) {
+      const id = context.state.users.length + 1;
+      const upd = [...context.state.users, { ...user, id }];
+      context.commit('updateUsers', upd);
+    },
     sortData(context, id) {
       const btn = context.state.sortButtons.filter((obj) => obj.sortId === id)[0];
       if (btn.smallest) {
