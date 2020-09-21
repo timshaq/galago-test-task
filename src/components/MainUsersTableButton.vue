@@ -4,22 +4,21 @@
     type="button"
     name="button"
     v-if="this.sortId"
-    @click.prevent="getSort()"
+    @click.prevent="sortTable(sortId)"
     :class="{ smallest: this.isSmallest, largest: this.isLargest }">
       {{ this.title }}
     </button>
 
-    <button v-else type="button" name="button">
+    <span v-else>
       {{ this.title }}
-    </button>
+    </span>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
 
 export default {
   name: 'MainUsersTableButton',
-  props: ['param'],
+  props: ['param', 'sortTable'],
   computed: {
     title() {
       return this.param.title;
@@ -35,12 +34,6 @@ export default {
     },
     isLargest() {
       return this.param.largest;
-    },
-  },
-  methods: {
-    ...mapActions(['sortData']),
-    getSort() {
-      this.sortData(this.sortId);
     },
   },
 };

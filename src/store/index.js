@@ -38,53 +38,69 @@ export default new Vuex.Store({
     ],
   },
   mutations: {
-    updateUsers(state, upd) {
+    addUser(state, upd) {
       state.users = upd;
     },
-    sortNum(state, { upd, id, sortTo }) {
-      const updUsers = state.users.sort((a, b) => a[id] - b[id]);
-      if (sortTo) updUsers.reverse();
-      state.sortButtons = upd;
-      state.users = updUsers;
+    sortUsers(state, { upd, id, sortTo }) {
+      const sortNum = () => {
+        const updUsers = state.users.sort((a, b) => a[id] - b[id]);
+        if (sortTo) updUsers.reverse();
+        state.sortButtons = upd;
+        state.users = updUsers;
+      };
+      const sortDate = () => {
+        const updUsers = state.users.sort((a, b) => {
+          let aa = a[id].split('.');
+          let bb = b[id].split('.');
+          aa = +aa[0] + +aa[1] * 100 + +aa[2] * 1000;
+          bb = +bb[0] + +bb[1] * 100 + +bb[2] * 1000;
+          return aa - bb;
+        });
+        if (sortTo) updUsers.reverse();
+        state.sortButtons = upd;
+        state.users = updUsers;
+      };
+      switch (id) {
+        case 'date':
+        case 'registration':
+          sortDate();
+          break;
+        default:
+          sortNum();
+          break;
+      }
     },
-    sortDate(state, { upd, id, sortTo }) {
-      const updUsers = state.users.sort((a, b) => {
-        let aa = a[id].split('.');
-        let bb = b[id].split('.');
-        aa = +aa[0] + +aa[1] * 100 + +aa[2] * 1000;
-        bb = +bb[0] + +bb[1] * 100 + +bb[2] * 1000;
-        return aa - bb;
-      });
-      if (sortTo) updUsers.reverse();
-      state.sortButtons = upd;
-      state.users = updUsers;
-    },
-  },
-  getters: {
-
   },
   actions: {
+    loadUsersFromStorage(context) {
+      const lStore = JSON.parse(localStorage.getItem('charity-run-app'));
+      if (lStore) {
+        const upd = [...context.state.users, ...lStore];
+        context.commit('addUser', upd);
+      }
+    },
     addUser(context, user) {
       const id = context.state.users.length + 1;
       const upd = [...context.state.users, { ...user, id }];
-      context.commit('updateUsers', upd);
+      context.commit('addUser', upd);
+
+      const lStore = JSON.parse(localStorage.getItem('charity-run-app'));
+      if (lStore) {
+        const updlStore = [...lStore, { ...user, id: `by-user${id}` }];
+        localStorage.setItem('charity-run-app', JSON.stringify(updlStore));
+      } else {
+        localStorage.setItem('charity-run-app', JSON.stringify([{ ...user, id: `by-user${id}` }]));
+      }
     },
     updateSort(context) {
       const buttons = context.state.sortButtons;
       const countSortBtn = buttons
         .find((btn) => (btn.smallest === true) || (btn.largest === true));
       const id = countSortBtn.sortId;
-      switch (id) {
-        case 'date':
-        case 'registration':
-          context.commit('sortDate', { upd: buttons, id, sortTo: !countSortBtn.smallest });
-          break;
-        default:
-          context.commit('sortNum', { upd: buttons, id, sortTo: !countSortBtn.smallest });
-          break;
-      }
+      const sortTo = !countSortBtn.smallest;
+      context.commit('sortUsers', { upd: buttons, id, sortTo });
     },
-    sortData(context, id) {
+    sortUsers(context, id) {
       const btn = context.state.sortButtons.find((obj) => obj.sortId === id);
 
       if (btn.smallest) {
@@ -96,9 +112,7 @@ export default new Vuex.Store({
       }
 
       const upd = context.state.sortButtons.map((obj) => {
-        if (obj.sortId === id) {
-          return btn;
-        }
+        if (obj.sortId === id) return btn;
         return {
           ...obj,
           smallest: false,
@@ -106,15 +120,8 @@ export default new Vuex.Store({
         };
       });
 
-      switch (id) {
-        case 'date':
-        case 'registration':
-          context.commit('sortDate', { upd, id, sortTo: !btn.smallest });
-          break;
-        default:
-          context.commit('sortNum', { upd, id, sortTo: !btn.smallest });
-          break;
-      }
+      const sortTo = !btn.smallest;
+      context.commit('sortUsers', { upd, id, sortTo });
     },
   },
 });

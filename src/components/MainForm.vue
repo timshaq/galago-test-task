@@ -2,31 +2,26 @@
   <div class="">
     <h2>Charity Run Form</h2>
     <form class="run__form" @submit.prevent="sendForm">
-      <BaseFormText v-model="formData.registration"
-      :error="formError.registration" type="hidden" />
+      <BaseFormText v-model="formData.registration" type="hidden" />
 
       <BaseFormText v-model="formData.name" title="ФИО"
-      :error="formError.name"
       placeholder="Фамилия Имя Отчество" />
 
       <BaseFormDate v-model="formData.date" title="Дата рождения"
-      :error="formError.date" placeholder="11.03.1998" />
+      placeholder="11.03.1998" />
 
       <BaseFormText v-model="formData.email" title="Email"
       :error="formError.email"
       placeholder="Email" />
 
       <BaseFormTel v-model="formData.phone" title="Телефон"
-      :error="formError.phone"
       placeholder="+7 (952) 336-60-76" />
 
       <BaseFormSelect v-model="formData.distance" title="Дистанция, км"
-      :error="formError.distance"
       placeholder="Выберите дистанцию"
       :options="[3, 5, 10]" />
 
       <BaseFormText v-model="formData.payment" title="Сумма взноса, руб."
-      :error="formError.payment"
       type="number"
       placeholder="Сумма пожертвования" />
 
@@ -42,7 +37,6 @@ import BaseFormSelect from '@/components/BaseFormSelect.vue';
 import BaseFormDate from '@/components/BaseFormDate.vue';
 import BaseFormTel from '@/components/BaseFormTel.vue';
 import validMail from '@/helpers/validMail';
-import { mapActions } from 'vuex';
 
 export default {
   data() {
@@ -58,6 +52,7 @@ export default {
       formError: {},
     };
   },
+  props: ['addUser'],
   components: {
     BaseFormText,
     BaseFormSelect,
@@ -65,12 +60,10 @@ export default {
     BaseFormTel,
   },
   methods: {
-    ...mapActions(['addUser', 'updateSort']),
     sendForm() {
       if (!this.formError.email) {
         this.formData.registration = new Date().toLocaleDateString();
         this.addUser(this.formData);
-        this.updateSort();
         this.formData = {};
       }
     },

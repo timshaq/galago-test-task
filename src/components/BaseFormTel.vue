@@ -5,9 +5,6 @@
       mask="+7 (###) ###-##-##"
       :placeholder="placeholder"
       v-model="dataValue" />
-      <span v-if="error" class="form__error">
-        {{ error }}
-      </span>
     </label>
 </template>
 
@@ -16,7 +13,7 @@ import { TheMask } from 'vue-the-mask';
 
 export default {
   name: 'BaseFormDate',
-  props: ['title', 'placeholder', 'error'],
+  props: ['title', 'placeholder'],
   components: { TheMask },
   computed: {
     dataValue: {

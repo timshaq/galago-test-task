@@ -27,6 +27,11 @@ Other minor edits.
 ```
 Created component AppPagination.
 ```
+## 21.09.2020 — upd 0.0.4
+```
+Added loading users from localStorage;
+Other minor edits.
+```
 
 ## Project setup
 ```

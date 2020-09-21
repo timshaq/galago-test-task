@@ -5,8 +5,10 @@
       <DatePicker  class="form__input"
       v-model="dataValue"
       :placeholder="placeholder"
-      :inline="true"
-      :language="ru">
+      :language="ru"
+      :disabled-dates="this.disabledDates"
+      :open-date="this.openDate"
+      >
       </DatePicker>
     </label>
 </template>
@@ -25,15 +27,16 @@ export default {
     };
   },
   computed: {
-    maxDate() {
+    disabledDates() {
       const nowDate = new Date();
-      nowDate.setFullYear(nowDate.getFullYear() - 16);
-      return nowDate;
+      const minDate = nowDate.setFullYear(nowDate.getFullYear() - 16);
+      const from = new Date(minDate);
+      return { from };
     },
-    minDate() {
-      const nowDate = new Date();
-      nowDate.setFullYear(nowDate.getFullYear() - 150);
-      return nowDate;
+    openDate() {
+      const { from } = this.disabledDates;
+      // const open = new Date(from).setDate(new Date(from).getDate() - 1);
+      return new Date(from);
     },
     dataValue: {
       get() {

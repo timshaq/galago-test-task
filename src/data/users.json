@@ -29,66 +29,6 @@
 			"phone": "+79008011000",
 			"distance": 3,
 			"payment": 1500
-		},
-		{
-			"id": 4,
-      "registration": "14.08.2020",
-			"date": "8.05.1997",
-			"name": "Катя Галина Юрьевна",
-			"email": "mokrushina@mail.ru",
-			"phone": "+79881125999",
-			"distance": 10,
-			"payment": 300
-		},
-		{
-			"id": 5,
-      "registration": "17.08.2020",
-			"date": "24.01.1886",
-			"name": "Альбина Сергеевна Заводская",
-			"email": "olga.zavodckaia@mail.ru",
-			"phone": "+79008011000",
-			"distance": 3,
-			"payment": 1500
-		},
-		{
-			"id": 6,
-      "registration": "14.08.2020",
-			"date": "8.05.1997",
-			"name": "Заносина Галина Юрьевна",
-			"email": "mokrushina@mail.ru",
-			"phone": "+79881125999",
-			"distance": 10,
-			"payment": 300
-		},
-		{
-			"id": 7,
-      "registration": "17.08.2020",
-			"date": "24.01.1886",
-			"name": "Кристина Сергеевна Заводская",
-			"email": "olga.zavodckaia@mail.ru",
-			"phone": "+79008011000",
-			"distance": 3,
-			"payment": 1500
-		},
-		{
-			"id": 8,
-      "registration": "14.08.2020",
-			"date": "8.05.1997",
-			"name": "Мокрушина Павел Юрьевна",
-			"email": "mokrushina@mail.ru",
-			"phone": "+79881125999",
-			"distance": 10,
-			"payment": 300
-		},
-		{
-			"id": 9,
-      "registration": "17.08.2020",
-			"date": "24.01.1886",
-			"name": "Последний герой",
-			"email": "olga.zavodckaia@mail.ru",
-			"phone": "+79008011000",
-			"distance": 3,
-			"payment": 1500
 		}
 	]
 }

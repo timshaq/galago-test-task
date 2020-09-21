@@ -4,14 +4,17 @@
     <h2>Charity Run Table</h2>
 
     <div class="table">
+
       <div class="row">
         <TableButton
         class="item"
-        v-for="btn in sortButtons"
+        v-for="btn in buttonsTable"
         :key="btn.title"
         :param="btn"
+        :sort-table="sortTable"
         />
       </div>
+
       <div class="row"
       v-for="user in users" :key="user.id">
         <div class="item">
@@ -42,23 +45,11 @@
 
 <script>
 import TableButton from '@/components/MainUsersTableButton.vue';
-import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'MainUsersTable',
-  props: ['users'],
-  components: {
-    TableButton,
-  },
-  methods: {
-    ...mapActions(['updateSort']),
-  },
-  computed: {
-    ...mapState(['sortButtons']),
-  },
-  created() {
-    this.updateSort();
-  },
+  props: ['users', 'buttonsTable', 'sortTable'],
+  components: { TableButton },
 };
 </script>
 
