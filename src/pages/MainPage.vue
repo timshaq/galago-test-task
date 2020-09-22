@@ -80,7 +80,7 @@ export default {
 <style>
 
 /* <NULL> */
-/* *{
+*{
   padding: 0;
   margin: 0;
   border: 0;
@@ -111,13 +111,13 @@ a, a:visited{text-decoration: none;}
 a:hover{text-decoration: none;}
 ul li{list-style: none;}
 img{vertical-align: top;}
-h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;} */
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 /* </NULL> */
 
 /* BASE */
 html,body {
-  /* overflow-x: hidden;
-  overflow-y: hidden; */
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 .run {
 }

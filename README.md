@@ -32,6 +32,12 @@ Created component AppPagination.
 Added loading users from localStorage;
 Other minor edits.
 ```
+## 22.09.2020 — upd 0.0.5
+```
+Added find of mask for input type="tel";
+Started layout working;
+Other minor edits.
+```
 
 ## Project setup
 ```

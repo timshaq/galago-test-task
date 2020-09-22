@@ -1,7 +1,7 @@
 <template>
     <label for="bornDate">
-      {{ title }}
-      <input type="text" name="bornDate" :value="$attrs.value" disabled >
+      <span class="form__value">{{ title }}</span>
+
       <DatePicker  class="form__input"
       v-model="dataValue"
       :placeholder="placeholder"
@@ -19,7 +19,7 @@ import { ru } from 'vuejs-datepicker/dist/locale';
 
 export default {
   name: 'BaseFormDate',
-  props: ['title', 'placeholder'],
+  props: ['title', 'placeholder', 'value'],
   components: { DatePicker },
   data() {
     return {
@@ -27,6 +27,12 @@ export default {
     };
   },
   computed: {
+    inputValue() {
+      if (this.value) {
+        return new Date(this.value).toLocaleDateString();
+      }
+      return '';
+    },
     disabledDates() {
       const nowDate = new Date();
       const minDate = nowDate.setFullYear(nowDate.getFullYear() - 16);
@@ -35,7 +41,6 @@ export default {
     },
     openDate() {
       const { from } = this.disabledDates;
-      // const open = new Date(from).setDate(new Date(from).getDate() - 1);
       return new Date(from);
     },
     dataValue: {
@@ -43,7 +48,7 @@ export default {
         return this.value;
       },
       set(value) {
-        this.$emit('input', value.toLocaleDateString());
+        this.$emit('input', value);
       },
     },
   },

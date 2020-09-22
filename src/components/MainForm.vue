@@ -1,33 +1,44 @@
 <template>
-  <div class="">
+  <div class="run__form-container">
     <h2>Charity Run Form</h2>
-    <form class="run__form" @submit.prevent="sendForm">
-      <BaseFormText v-model="formData.registration" type="hidden" />
+     <div class="run__form-card">
+       <form class="run__form" @submit.prevent="sendForm">
 
-      <BaseFormText v-model="formData.name" title="ФИО"
-      placeholder="Фамилия Имя Отчество" />
+         <BaseFormText v-model="formData.registration" type="hidden" />
 
-      <BaseFormDate v-model="formData.date" title="Дата рождения"
-      placeholder="11.03.1998" />
+         <div class="run__form-row">
 
-      <BaseFormText v-model="formData.email" title="Email"
-      :error="formError.email"
-      placeholder="Email" />
+           <BaseFormText v-model="formData.name" title="ФИО"
+           placeholder="Фамилия Имя Отчество" />
 
-      <BaseFormTel v-model="formData.phone" title="Телефон"
-      placeholder="+7 (952) 336-60-76" />
+           <BaseFormDate v-model="formData.date" title="Дата рождения"
+           placeholder="11.03.1998" />
 
-      <BaseFormSelect v-model="formData.distance" title="Дистанция, км"
-      placeholder="Выберите дистанцию"
-      :options="[3, 5, 10]" />
+           <BaseFormText v-model="formData.email" title="Email"
+           :error="formError.email"
+           placeholder="Email" />
 
-      <BaseFormText v-model="formData.payment" title="Сумма взноса, руб."
-      type="number"
-      placeholder="Сумма пожертвования" />
+         </div>
 
-      <button :disabled="buttonIsDisabled" type="submit" name="button">Отправить заявку</button>
+         <div class="run__form-row">
 
-    </form>
+           <BaseFormTel v-model="formData.phone" title="Телефон" />
+
+           <BaseFormSelect v-model="formData.distance" title="Дистанция, км"
+           placeholder="Выберите дистанцию"
+           :options="[3, 5, 10]" />
+
+           <BaseFormText v-model="formData.payment" title="Сумма взноса, руб."
+           type="number"
+           placeholder="Сумма пожертвования" />
+
+         </div>
+
+         <button class="form__submit"
+         :disabled="buttonIsDisabled" type="submit" name="button">Отправить заявку</button>
+
+       </form>
+     </div>
   </div>
 </template>
 
@@ -62,9 +73,12 @@ export default {
   methods: {
     sendForm() {
       if (!this.formError.email) {
-        this.formData.registration = new Date().toLocaleDateString();
-        this.addUser(this.formData);
-        this.formData = {};
+        const data = { ...this.formData };
+        data.date = data.date.toLocaleDateString();
+        data.phone = data.phone.replace(/\D*/g, '');
+        data.registration = new Date().toLocaleDateString();
+        this.addUser(data);
+        Object.keys(this.formData).forEach((key) => { this.formData[key] = ''; });
       }
     },
     checkMailValid() {
@@ -90,10 +104,58 @@ export default {
 </script>
 
 <style>
+  .run__form-container {
+
+  }
+  .run__form-card {
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px;
+    background: rgb(173,216,230);
+  }
   .run__form {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    padding: 30px 50px;
+    border: solid 3px #FFFFFF;
+  }
+  .run__form-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+  }
+  .form__label {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 33.333%;
+    margin: 0 10px;
+  }
+  .form__input {
+    width: 100%;
+    padding: 0 0 0 20px;
+    font-size: 16px;
+
+  }
+  .form__submit {
+    padding: 15px 40px;
+    background: rgb(65,105,225);
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .form__submit:disabled {
+    padding: 15px 40px;
+    background: rgb(169,169,169);
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: not-allowed;
   }
 </style>
