@@ -1,18 +1,34 @@
 <template>
-  <section id="app" class="run">
+  <section class="run">
 
-      <div class="run_row">
+    <div class="run__row">
+      <div class="run__col col__left">
+        <h1 class="run__title_h1">
+          Марафон в поддержку детей
+        </h1>
+
+        <img src="@/assets/runners.png" alt="" class="run__title-img">
+      </div>
+
+      <div class="run__col col__right">
         <MainForm
         :add-user="this.addUserInTable"
         />
       </div>
+    </div>
 
-      <div class="run__row">
+    <h2 class="run__title_h2">
+      Таблица участников
+      <span v-show="countUsers > usersPerPage">{{ usersPerPage }}/{{ countUsers }}</span>
+    </h2>
+    <div class="run_row run__row-table">
+
         <MainUsersTable
         :users="usersForTable"
         :buttons-table="this.sortButtons"
         :sort-table="this.sortUsers"
         />
+
         <AppPagination v-if="this.countUsers > this.usersPerPage"
         v-model='page'
         :page="page"
@@ -35,7 +51,7 @@ export default {
   data() {
     return {
       page: 1,
-      usersPerPage: 6,
+      usersPerPage: 4,
     };
   },
   methods: {
@@ -78,47 +94,54 @@ export default {
 };
 </script>
 <style>
-
-/* <NULL> */
-*{
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-*,*:before,*:after{
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-:focus,:active{outline: none;}
-a:focus,a:active{outline: none;}
-nav,footer,header,aside{display: block;}
-html,body{
-  height: 100%;
-  width: 100%;
-  font-size: 100%;
-  line-height: 1;
-  font-size: 14px;
-  -ms-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-}
-input,button,textarea{font-family:inherit;}
-input::-ms-clear{display: none;}
-button{cursor: pointer;}
-button::-moz-focus-inner {padding:0;border:0;}
-a, a:visited{text-decoration: none;}
-a:hover{text-decoration: none;}
-ul li{list-style: none;}
-img{vertical-align: top;}
-h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
-/* </NULL> */
-
-/* BASE */
-html,body {
-  overflow-x: hidden;
-  overflow-y: hidden;
+.run-wrapper {
+  background: #FFFFFF;
+  box-shadow: 0px 20px 20px 15px rgba(0, 0, 0, 0.5);
+  border-radius: 50px;
+  width: 90%;
+  overflow: hidden;
+  width: 1732px;
+  height: 974px;
 }
 .run {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 45px 0 0 0;
+}
+.run__title_h1 {
+  font-size: 36px;
+  line-height: 43px;
+  font-weight: 600;
+}
+.run__row {
+  display: flex;
+}
+.run__row-table {
+  background: #F5F5F5;
+}
+.run__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.col__left {
+  width: 35%;
+  padding: 0 0 0 95px;
+}
+.col__right {
+  width: 65%;
+}
+.run__title-img {
+  margin: 20px 0 0 0;
+}
+.run__title_h2 {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 600;
+  text-align: right;
+  padding: 10px 70px;
 }
 </style>

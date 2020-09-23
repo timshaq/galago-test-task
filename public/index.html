@@ -17,11 +17,25 @@
   <body>
     <style media="screen">
     @font-face {
-      font-family: 'FlagsColorWorld1';
-      src: local('FlagsColorWorld1'),
-          url('<%= BASE_URL %>fonts/FlagsColorWorld1.ttf') format('truetype');
+      font-family: 'BabelStoneFlagsDual';
+      src: local('BabelStoneFlagsDual'),
+          url('<%= BASE_URL %>fonts/BabelStoneFlagsDual.ttf') format('truetype'),
+          url('<%= BASE_URL %>fonts/BabelStoneFlagsDual.woff') format('woff'),
+          url('<%= BASE_URL %>fonts/BabelStoneFlagsDual.woff2') format('woff2');
       font-weight: 400;
       font-style: normal;
+    }
+    @font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: url('assets/fonts/lato-v17-latin-regular.eot');
+    src: local('Lato Regular'), local('Lato-Regular'),
+         url('<%= BASE_URL %>fonts/lato-v17-latin-regular.eot?#iefix') format('embedded-opentype'),
+         url('<%= BASE_URL %>fonts/lato-v17-latin-regular.woff2') format('woff2'),
+         url('<%= BASE_URL %>fonts/lato-v17-latin-regular.woff') format('woff'),
+         url('<%= BASE_URL %>fonts/lato-v17-latin-regular.ttf') format('truetype'),
+         url('<%= BASE_URL %>fonts/lato-v17-latin-regular.svg#Lato') format('svg');
     }
     </style>
     <noscript>

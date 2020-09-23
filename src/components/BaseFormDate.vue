@@ -1,8 +1,8 @@
 <template>
-    <label for="bornDate">
+    <div class="form__label">
       <span class="form__value">{{ title }}</span>
 
-      <DatePicker  class="form__input"
+      <DatePicker  input-class="form__input"
       v-model="dataValue"
       :placeholder="placeholder"
       :language="ru"
@@ -10,7 +10,7 @@
       :open-date="this.openDate"
       >
       </DatePicker>
-    </label>
+    </div>
 </template>
 
 <script>

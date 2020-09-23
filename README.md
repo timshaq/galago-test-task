@@ -38,6 +38,11 @@ Added find of mask for input type="tel";
 Started layout working;
 Other minor edits.
 ```
+## 23.09.2020 — upd 0.0.6
+```
+Layout change;
+Other minor edits.
+```
 
 ## Project setup
 ```

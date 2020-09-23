@@ -1,44 +1,44 @@
 <template>
   <div class="run__form-container">
-    <h2>Charity Run Form</h2>
-     <div class="run__form-card">
-       <form class="run__form" @submit.prevent="sendForm">
+     <form class="run__form" @submit.prevent="sendForm">
 
-         <BaseFormText v-model="formData.registration" type="hidden" />
+       <BaseFormText v-model="formData.registration" type="hidden" />
 
-         <div class="run__form-row">
+       <div class="run__form-row">
 
-           <BaseFormText v-model="formData.name" title="ФИО"
-           placeholder="Фамилия Имя Отчество" />
+         <BaseFormText v-model="formData.name" title="ФИО"
+         placeholder="Ваше имя" />
 
-           <BaseFormDate v-model="formData.date" title="Дата рождения"
-           placeholder="11.03.1998" />
+         <BaseFormDate v-model="formData.date" title="Дата рождения"
+         placeholder="11.03.1998" />
 
-           <BaseFormText v-model="formData.email" title="Email"
-           :error="formError.email"
-           placeholder="Email" />
+         <BaseFormText v-model="formData.email" title="Email"
+         :error="formError.email"
+         placeholder="Email" />
 
-         </div>
+       </div>
 
-         <div class="run__form-row">
+       <div class="run__form-row">
 
-           <BaseFormTel v-model="formData.phone" title="Телефон" />
+         <BaseFormTel v-model="formData.phone" title="Телефон"
+         placeholder="Номер телефона"/>
 
-           <BaseFormSelect v-model="formData.distance" title="Дистанция, км"
-           placeholder="Выберите дистанцию"
-           :options="[3, 5, 10]" />
+         <BaseFormSelect v-model="formData.distance" title="Дистанция, км"
+         placeholder="Выберите дистанцию"
+         :options="[3, 5, 10]" />
 
-           <BaseFormText v-model="formData.payment" title="Сумма взноса, руб."
-           type="number"
-           placeholder="Сумма пожертвования" />
+         <BaseFormText v-model="formData.payment" title="Сумма взноса, руб."
+         type="number"
+         placeholder="Сумма" />
 
-         </div>
+       </div>
 
-         <button class="form__submit"
-         :disabled="buttonIsDisabled" type="submit" name="button">Отправить заявку</button>
+       <button class="form__submit"
+       :disabled="buttonIsDisabled" type="submit" name="button">Отправить заявку</button>
 
-       </form>
-     </div>
+       <span v-show="userIsAdd" class="form__success">Вы попали в список участников ✓</span>
+
+     </form>
   </div>
 </template>
 
@@ -61,6 +61,7 @@ export default {
         payment: '',
       },
       formError: {},
+      userIsAdd: false,
     };
   },
   props: ['addUser'],
@@ -75,10 +76,11 @@ export default {
       if (!this.formError.email) {
         const data = { ...this.formData };
         data.date = data.date.toLocaleDateString();
-        data.phone = data.phone.replace(/\D*/g, '');
+        data.phone = `+${data.phone.replace(/\D*/g, '')}`;
         data.registration = new Date().toLocaleDateString();
         this.addUser(data);
         Object.keys(this.formData).forEach((key) => { this.formData[key] = ''; });
+        this.userIsAdd = true;
       }
     },
     checkMailValid() {
@@ -105,13 +107,8 @@ export default {
 
 <style>
   .run__form-container {
-
-  }
-  .run__form-card {
-    width: 50%;
-    margin: 0 auto;
-    padding: 10px;
-    background: rgb(173,216,230);
+    width: 819px;
+    height: 298.11px;
   }
   .run__form {
     width: 100%;
@@ -136,19 +133,31 @@ export default {
     align-items: flex-start;
     width: 33.333%;
     margin: 0 10px;
+    position: relative;
+  }
+  .form__value {
+    font-size: 18px;
+    padding: 0 0 5px 30px;
+    font-weight: 600;
   }
   .form__input {
     width: 100%;
-    padding: 0 0 0 20px;
-    font-size: 16px;
-
+    background: #e8f0fe;
+    border-radius: 50px;
+    padding: 15px 20px;
+    font-size: 18px;
+  }
+  .form__input::placeholder {
+    font-size: 18px;
   }
   .form__submit {
     padding: 15px 40px;
-    background: rgb(65,105,225);
+    background: #00AA4B;
+    border-radius: 50px;
     color: #FFFFFF;
     font-size: 20px;
     font-weight: 600;
+    margin: 30px 0 0 0;
   }
   .form__submit:disabled {
     padding: 15px 40px;
@@ -157,5 +166,15 @@ export default {
     font-size: 20px;
     font-weight: 600;
     cursor: not-allowed;
+  }
+  .form__success {
+    color: #00AA4B;
+    font-size: 16px;
+    margin: 10px;
+  }
+  .form__error {
+    position: absolute;
+    top: 0;
+    right: 30px;
   }
 </style>

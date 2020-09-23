@@ -1,6 +1,6 @@
 <template>
     <button
-    class="btn-sort"
+    class="header__btn-sort"
     type="button"
     name="button"
     v-if="this.sortId"
@@ -38,15 +38,3 @@ export default {
   },
 };
 </script>
-
-<style>
-  .btn-sort {
-    background: transparent;
-  }
-  .smallest {
-    background: rgba(0,128,0,.3);
-  }
-  .largest {
-    background: rgba(0,191,255,.3);
-  }
-</style>

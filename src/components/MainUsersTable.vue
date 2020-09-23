@@ -1,43 +1,38 @@
 <template>
-  <div class="">
+  <div class="run__table">
 
-    <h2>Charity Run Table</h2>
+    <div class="table__headers">
+      <TableButton
+      class="headers__item"
+      v-for="btn in buttonsTable"
+      :key="btn.title"
+      :param="btn"
+      :sort-table="sortTable"
+      />
+    </div>
 
-    <div class="table">
-
-      <div class="row">
-        <TableButton
-        class="item"
-        v-for="btn in buttonsTable"
-        :key="btn.title"
-        :param="btn"
-        :sort-table="sortTable"
-        />
+    <div class="table__row"
+    v-for="user in users" :key="user.id">
+      <div class="row__item">
+        {{ user.registration }}
       </div>
-
-      <div class="row"
-      v-for="user in users" :key="user.id">
-        <div class="item">
-          {{ user.registration }}
-        </div>
-        <div class="item">
-          {{ user.name }}
-        </div>
-        <div class="item">
-          {{ user.date }}
-        </div>
-        <div class="item">
-          {{ user.email }}
-        </div>
-        <div class="item">
-          {{ user.phone }}
-        </div>
-        <div class="item">
-          {{ user.distance }}
-        </div>
-        <div class="item">
-          {{ user.payment }}
-        </div>
+      <div class="row__item">
+        {{ user.name }}
+      </div>
+      <div class="row__item">
+        {{ user.date }}
+      </div>
+      <div class="row__item">
+        {{ user.email }}
+      </div>
+      <div class="row__item">
+        {{ user.phone }}
+      </div>
+      <div class="row__item">
+        {{ user.distance }}
+      </div>
+      <div class="row__item">
+        {{ user.payment }}
       </div>
     </div>
   </div>
@@ -57,11 +52,68 @@ export default {
   h2 {
     text-align: center;
   }
-  .row {
+  .run__table {
+    width: 100%;
+  }
+  .table__headers, .table__row {
+    width: 100%;
     display: flex;
   }
-  .item {
+  .table__headers {
+    padding: 20px 0 0 0;
+    font-weight: 600;
+  }
+  .table__row {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    border-radius: 50px;
+    padding: 20px 0;
+    margin: 25px 0;
+  }
+  .table__row:hover {
+    background: rgba(0, 134, 248, 0.1);
+    border: 1px solid rgba(0, 134, 248, 0.81);
+    box-sizing: border-box;
+    border-radius: 50px;
+  }
+  .row__item, .headers__item {
     width: 15%;
     margin: 5px 10px;
+    font-size: 18px;
+    text-align: center;
+  }
+  .header__btn-sort {
+    text-align: left;
+    padding: 0 0 0 20px;
+    position: relative;
+    background: transparent;
+    font-weight: 600;
+  }
+  .header__btn-sort:before,
+  .header__btn-sort:after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    width: 8px;
+    height: 8px;
+    border: 6px solid transparent;
+    outline: none;
+  }
+  .header__btn-sort:before {
+    top: 60%;
+    border-top: 8px solid #C4C4C4;
+  }
+  .header__btn-sort:after {
+    bottom: 60%;
+    border-bottom: 8px solid #C4C4C4;
+  }
+  .header__btn-sort.largest:before {
+    top: 60%;
+    border-top: 8px solid #0086F8;
+  }
+  .header__btn-sort.smallest:after {
+    bottom: 60%;
+    border-bottom: 8px solid #0086F8;
   }
 </style>

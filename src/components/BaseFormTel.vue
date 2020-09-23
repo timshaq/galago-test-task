@@ -1,5 +1,5 @@
 <template>
-  <label class="form__label">
+  <label class="form__label input__tel">
     <span class="form__value">{{ title }}</span>
       <span v-show="currentMask.id" class="flags-font">
         {{ currentMask.content }}
@@ -7,16 +7,13 @@
 
       <input type="tel" class="form__input"
       v-mask="currentMask.mask"
-      :placeholder="currentMask.placeholder"
+      :placeholder="placeholder"
       v-model="dataValue"
       @focus="onFocus"
       @blur="onBlur"
       @change="findMask"
       @keydown="findMask"
       />
-
-      <span v-show="focus">FOCUS</span>
-
   </label>
 </template>
 
@@ -50,7 +47,7 @@ export default {
           placeholder: '+7 (952) 336-60-67',
           pattern: /\d\d\d\d\d\d\d\d\d\d\d/,
           code_pattern: /^\+7.*$/g,
-          content: 'r',
+          content: '🇷🇺',
         },
         {
           id: 'ua',
@@ -59,7 +56,7 @@ export default {
           placeholder: '+38 (096) 894-99-27',
           pattern: /\d\d\d\d\d\d\d\d\d\d\d\d/,
           code_pattern: /^\+38.*$/g,
-          content: 'U',
+          content: '🇺🇦',
         },
         {
           id: 'by',
@@ -68,7 +65,7 @@ export default {
           placeholder: '+375 (24) 602-24-25',
           pattern: /\d\d\d\d\d\d\d\d\d\d\d\d/,
           code_pattern: /^\+375.*$/g,
-          content: 'U',
+          content: '🇧🇾',
         },
         {
           id: 'isr',
@@ -77,6 +74,7 @@ export default {
           placeholder: '+972 (052) 342-49-04',
           pattern: /\d\d\d\d\d\d\d\d\d\d\d\d/,
           code_pattern: /^\+972.*$/g,
+          content: '🇮🇱',
         },
         {
           id: 'us',
@@ -85,14 +83,16 @@ export default {
           placeholder: '+1 (212) 123-45-67',
           pattern: /\d\d\d\d\d\d\d\d\d\d/,
           code_pattern: /^\+1.*$/g,
+          content: '🇺🇸',
         },
         {
-          id: 'lva',
+          id: 'lv',
           code: '+371',
           mask: '+371 (###) ##-##',
           placeholder: '+371 (212) 45-67',
           pattern: /\d\d\d\d\d\d\d\d\d\d/,
           code_pattern: /^\+371.*$/g,
+          content: '🇱🇻',
         },
       ],
     };
@@ -136,7 +136,13 @@ export default {
 };
 </script>
 <style media="screen">
+  .input__tel {
+    position: relative;
+  }
   .flags-font {
-    font-family: FlagsColorWorld1;
+    font-family: 'BabelStoneFlagsDual';
+    position: absolute;
+    top: 0;
+    right: 30px;
   }
 </style>
