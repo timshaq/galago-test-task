@@ -70,17 +70,28 @@ export default {
       this.updateSort();
     },
     updateUsersPerPage() {
-      const vw = window.innerWidth;
-      switch (true) {
-        case (vw >= 1920):
-          this.usersPerPage = 4;
-          console.log('1920+');
-          break;
-        default:
-          console.log('<1920');
-          this.usersPerPage = 2;
-          break;
-      }
+      // const vw = window.innerWidth;
+      // switch (true) {
+      //   case (vw >= 1920):
+      //     this.usersPerPage = 4;
+      //     console.log('1920+');
+      //     break;
+      //   default:
+      //     console.log('<1920');
+      //     this.usersPerPage = 2;
+      //     break;
+      // }
+      // const vh = window.innerHeight;
+      // switch (true) {
+      //   case (vh >= 1080):
+      //     this.usersPerPage = 4;
+      //     break;
+      //   case (vh <= 1000):
+      //     this.usersPerPage = 3;
+      //     break;
+      //   default:
+      //     break;
+      // }
     },
   },
   computed: {
@@ -167,5 +178,73 @@ export default {
   font-weight: 600;
   text-align: right;
   padding: 10px 70px;
+}
+@media (max-height: 1040px) {
+  .run-wrapper {
+    height: 88%;
+  }
+  .run__title-img {
+    width: 350px;
+  }
+}
+@media (max-width: 1919px), (max-height: 1079px) {
+  .run {
+    padding: 15px 0 0 0;
+  }
+  .run-wrapper {
+    width: 95%;
+    height: 95%;
+  }
+  .col__left {
+    padding: 0 0 0 40px;
+  }
+  .run__title_h1 {
+    font-size: 25px;
+  }
+  .run__row {
+    flex-direction: column;
+  }
+  .col__left, .col__right {
+    width: 100%;
+  }
+  .run__form {
+    padding: 30px 0 0 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .run__form-row {
+    width: 50%;
+  }
+  .run__title-img {
+    display: none;
+  }
+  .run__form-container {
+    width: 100%;
+    height: fit-content;
+  }
+  .form__value, .form__input, .form__submit, .form__submit:disabled {
+    font-size: 16px;
+  }
+  .form__submit, .form__submit:disabled {
+    margin-top: 15px;
+  }
+  .run__title_h2 {
+    font-size: 18px;
+  }
+  .header__btn-sort:before, .header__btn-sort:after {
+    right: 0;
+  }
+  .row__item, .headers__item {
+    font-size: 16px;
+  }
+  .table__row {
+    padding: 10px 0;
+  }
+  .run__row-table {
+    height: fit-content;
+    padding-bottom: 18px;
+  }
 }
 </style>

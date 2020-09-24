@@ -40,6 +40,8 @@ html,body{
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  min-width: 1280px;
+  min-height: 800px;
 }
 input,button,textarea{font-family:inherit;}
 input::-ms-clear{display: none;}

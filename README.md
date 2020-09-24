@@ -51,6 +51,18 @@ Improved AppPagination component;
 Layout change;
 Other minor edits.
 ```
+## 24.09.2020 — upd 0.0.8
+```
+Layout change;
+Other minor edits.
+```
+## Used packets (vue-components)
+```
+vue-the-mask — ver. 0.11.1;
+vuejs-datepicker — ver. 1.6.2.
+
+All list of packets look in package.json.
+```
 
 ## Project setup
 ```

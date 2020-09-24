@@ -2,7 +2,7 @@
   <div class="run__form-container">
      <form class="run__form" @submit.prevent="sendForm">
 
-       <BaseFormText v-model="formData.registration" type="hidden" />
+       <BaseFormText v-model="formData.registration" type="hidden" class="hidden" />
 
        <div class="run__form-row">
 
@@ -33,10 +33,14 @@
 
        </div>
 
-       <button class="form__submit"
+       <transition-group tag="DIV">
+       <button class="form__submit" :key="1"
        :disabled="buttonIsDisabled" type="submit" name="button">Отправить заявку</button>
 
-       <span v-show="userAdded" class="form__success">Вы попали в список участников ✓</span>
+       <span v-show="userAdded" class="form__success" :key="2">
+         Вы попали в список участников ✓
+       </span>
+       </transition-group>
 
      </form>
   </div>
@@ -142,6 +146,9 @@ export default {
     width: 33.333%;
     margin: 0 10px;
     position: relative;
+  }
+  .form__label.hidden {
+    display: none;
   }
   .form__value {
     font-size: 18px;

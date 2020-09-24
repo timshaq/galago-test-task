@@ -11,7 +11,7 @@
       />
     </div>
 
-    <div class="table__row"
+    <div class="table__row" style="transition: all 3s ease;"
     v-for="user in users" :key="user.id">
       <div class="row__item">
         {{ user.registration }}
@@ -58,6 +58,7 @@ export default {
   .table__headers, .table__row {
     width: 100%;
     display: flex;
+    align-items: center;
   }
   .table__headers {
     padding: 20px 0 0 0;
@@ -70,6 +71,8 @@ export default {
     border-radius: 50px;
     padding: 20px 0;
     margin: 25px 0;
+    max-height: 125px;
+    overflow: hidden;
   }
   .table__row:hover {
     background: rgba(0, 134, 248, 0.1);
@@ -85,7 +88,7 @@ export default {
   }
   .header__btn-sort {
     text-align: left;
-    padding: 0 0 0 20px;
+    padding: 0 15px;
     position: relative;
     background: transparent;
     font-weight: 600;
@@ -116,4 +119,16 @@ export default {
     bottom: 60%;
     border-bottom: 8px solid #0086F8;
   }
+
+.fade-enter-active, .fade-leave-active {
+  transition: all opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+  transform: scale(1.5);
+  margin: 0 10px;
+}
+.fade-enter-active {
+  animation: round 1s;
+}
 </style>
