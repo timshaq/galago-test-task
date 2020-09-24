@@ -17,9 +17,8 @@
       </div>
     </div>
 
-    <h2 class="run__title_h2">
-      Таблица участников
-      <span v-show="countUsers > usersPerPage">{{ usersPerPage }}/{{ countUsers }}</span>
+    <h2 class="run__title_h2" v-show="countUsers > 0">
+      С нами уже {{ countUsers | usersDeclension }}
     </h2>
     <div class="run_row run__row-table">
 
@@ -34,6 +33,7 @@
         :page="page"
         :count="countUsers"
         :perPage="usersPerPage"
+        :limit="limitPagination"
         />
       </div>
 
@@ -45,6 +45,7 @@ import MainUsersTable from '@/components/MainUsersTable.vue';
 import AppPagination from '@/components/AppPagination.vue';
 import MainForm from '@/components/MainForm.vue';
 import { mapState, mapActions } from 'vuex';
+import usersDeclension from '@/helpers/usersDeclension';
 
 export default {
   name: 'MainPage',
@@ -52,8 +53,11 @@ export default {
     return {
       page: 1,
       usersPerPage: 4,
+
+      limitPagination: 10,
     };
   },
+  filters: { usersDeclension },
   methods: {
     ...mapActions([
       'addUser',
@@ -64,6 +68,19 @@ export default {
     addUserInTable(user) {
       this.addUser(user);
       this.updateSort();
+    },
+    updateUsersPerPage() {
+      const vw = window.innerWidth;
+      switch (true) {
+        case (vw >= 1920):
+          this.usersPerPage = 4;
+          console.log('1920+');
+          break;
+        default:
+          console.log('<1920');
+          this.usersPerPage = 2;
+          break;
+      }
     },
   },
   computed: {
@@ -90,6 +107,8 @@ export default {
   created() {
     this.loadUsersFromStorage();
     this.updateSort();
+    this.updateUsersPerPage();
+    window.addEventListener('resize', this.updateUsersPerPage);
   },
 };
 </script>
@@ -121,6 +140,11 @@ export default {
 }
 .run__row-table {
   background: #F5F5F5;
+  height: 524px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 35px;
 }
 .run__col {
   display: flex;

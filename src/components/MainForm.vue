@@ -36,7 +36,7 @@
        <button class="form__submit"
        :disabled="buttonIsDisabled" type="submit" name="button">Отправить заявку</button>
 
-       <span v-show="userIsAdd" class="form__success">Вы попали в список участников ✓</span>
+       <span v-show="userAdded" class="form__success">Вы попали в список участников ✓</span>
 
      </form>
   </div>
@@ -61,7 +61,7 @@ export default {
         payment: '',
       },
       formError: {},
-      userIsAdd: false,
+      userAdded: false,
     };
   },
   props: ['addUser'],
@@ -79,8 +79,12 @@ export default {
         data.phone = `+${data.phone.replace(/\D*/g, '')}`;
         data.registration = new Date().toLocaleDateString();
         this.addUser(data);
-        Object.keys(this.formData).forEach((key) => { this.formData[key] = ''; });
-        this.userIsAdd = true;
+        const setFormData = new Promise((resolve) => {
+          Object.keys(this.formData).forEach((key) => { this.formData[key] = ''; });
+          resolve();
+        });
+        setFormData.then(() => { this.userAdded = true; });
+        this.formError = {};
       }
     },
     checkMailValid() {
@@ -89,9 +93,11 @@ export default {
   },
   computed: {
     buttonIsDisabled() {
-      const formDataItems = Object.keys(this.formData).map((key) => this.formData[key]);
-      const nullItems = formDataItems.filter((item) => item.length === 0);
-      return Boolean(nullItems.length);
+      const nullItems = this.formDataItems.filter((item) => item.length === 0);
+      return Boolean(nullItems.length || this.formError.email);
+    },
+    formDataItems() {
+      return Object.keys(this.formData).map((key) => this.formData[key]);
     },
     formDataEmail() {
       return this.formData.email;
@@ -99,7 +105,10 @@ export default {
   },
   watch: {
     formDataEmail() {
-      this.checkMailValid();
+      if (this.formData.email) this.checkMailValid();
+    },
+    formDataItems() {
+      this.userAdded = false;
     },
   },
 };
@@ -117,7 +126,6 @@ export default {
     align-items: center;
     justify-content: space-between;
     padding: 30px 50px;
-    border: solid 3px #FFFFFF;
   }
   .run__form-row {
     width: 100%;

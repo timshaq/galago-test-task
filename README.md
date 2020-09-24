@@ -43,6 +43,14 @@ Other minor edits.
 Layout change;
 Other minor edits.
 ```
+## 24.09.2020 — upd 0.0.7
+```
+Created filter for naming of users count (usersDeclension.js);
+Created telephone masks catalog (telMask.js);
+Improved AppPagination component;
+Layout change;
+Other minor edits.
+```
 
 ## Project setup
 ```
