@@ -84,17 +84,6 @@ export default {
       this.updateSort();
     },
     updateUsersPerPage() {
-      // const vw = window.innerWidth;
-      // switch (true) {
-      //   case (vw >= 1920):
-      //     this.usersPerPage = 4;
-      //     console.log('1920+');
-      //     break;
-      //   default:
-      //     console.log('<1920');
-      //     this.usersPerPage = 2;
-      //     break;
-      // }
       const vh = window.innerHeight;
       switch (true) {
         case (vh <= 740):
@@ -109,14 +98,14 @@ export default {
   computed: {
     ...mapState(['users', 'sortButtons']),
     isIE10() {
-      const agent = navigator.userAgent;
-      const reg = /MSIE ([^;]*)/;
-      const exec = reg.exec(agent);
-      if (exec) {
-        const ver = exec[1].split('.')[0];
+      try {
+        const agent = navigator.userAgent;
+        const reg = /MSIE ([^;]*)/;
+        const ver = reg.exec(agent)[1].split('.')[0];
         return (+ver === 10);
+      } catch {
+        return false;
       }
-      return false;
     },
     totalUsers() {
       return this.users.length;
@@ -127,9 +116,8 @@ export default {
     usersForTable() {
       const end = this.usersPerPage * this.page;
       const start = end - this.usersPerPage;
-      const usersArr = this.users
+      return this.users
         .filter((usr) => this.users.indexOf(usr) < end && this.users.indexOf(usr) >= start);
-      return usersArr;
     },
   },
   components: {

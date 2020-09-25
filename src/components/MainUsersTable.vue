@@ -11,30 +11,32 @@
       />
     </div>
 
-    <div class="table__row" style="transition: all 3s ease;"
-    v-for="user in users" :key="user.id">
-      <div class="row__item">
-        {{ user.registration }}
+    <transition-group name="fade">
+      <div class="table__row"
+      v-for="user in users" :key="user.id">
+        <div class="row__item">
+          {{ user.registration }}
+        </div>
+        <div class="row__item">
+          {{ user.name }}
+        </div>
+        <div class="row__item">
+          {{ user.date }}
+        </div>
+        <div class="row__item">
+          {{ user.email }}
+        </div>
+        <div class="row__item">
+          {{ user.phone }}
+        </div>
+        <div class="row__item">
+          {{ user.distance }}
+        </div>
+        <div class="row__item">
+          {{ user.payment }}
+        </div>
       </div>
-      <div class="row__item">
-        {{ user.name }}
-      </div>
-      <div class="row__item">
-        {{ user.date }}
-      </div>
-      <div class="row__item">
-        {{ user.email }}
-      </div>
-      <div class="row__item">
-        {{ user.phone }}
-      </div>
-      <div class="row__item">
-        {{ user.distance }}
-      </div>
-      <div class="row__item">
-        {{ user.payment }}
-      </div>
-    </div>
+    </transition-group>
   </div>
 </template>
 
@@ -121,15 +123,14 @@ export default {
     border-bottom: 8px solid #0086F8;
   }
 
-.fade-enter-active, .fade-leave-active {
-  transition: all opacity .5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
-  opacity: 0;
-  transform: scale(1.5);
-  margin: 0 10px;
-}
-.fade-enter-active {
-  animation: round 1s;
-}
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+    transform: translateX(-120%);
+    transition: all .8s;
+    position: absolute;
+  }
+  .fade-leave-active {
+    position: absolute;
+    opacity: .2;
+  }
 </style>

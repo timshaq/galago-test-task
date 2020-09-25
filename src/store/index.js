@@ -73,15 +73,25 @@ export default new Vuex.Store({
   },
   actions: {
     loadUsersFromStorage(context) {
-      const lStore = JSON.parse(localStorage.getItem('charity-run-app'));
+      let lStore = JSON.parse(localStorage.getItem('charity-run-app'));
       if (lStore) {
+        lStore = lStore.map((item) => ({
+          ...item,
+          date: new Date(item.date).toLocaleDateString(),
+          registration: new Date(item.registration).toLocaleDateString(),
+        }));
         const upd = [...context.state.users, ...lStore];
         context.commit('addUser', upd);
       }
     },
     addUser(context, user) {
       const id = context.state.users.length + 1;
-      const upd = [...context.state.users, { ...user, id }];
+      const upd = [...context.state.users, {
+        ...user,
+        id,
+        date: new Date(user.date).toLocaleDateString(),
+        registration: new Date(user.registration).toLocaleDateString(),
+      }];
       context.commit('addUser', upd);
 
       const lStore = JSON.parse(localStorage.getItem('charity-run-app'));

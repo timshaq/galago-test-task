@@ -33,7 +33,7 @@
 
        </div>
 
-       <transition-group tag="DIV">
+       <transition-group name="fade">
        <button class="form__submit" :key="1"
        :disabled="buttonIsDisabled" type="submit" name="button">Отправить заявку</button>
 
@@ -79,11 +79,8 @@ export default {
     sendForm() {
       if (!this.formError.email) {
         const data = { ...this.formData };
-        console.log('data.date');
-        console.log(data.date.toString());
-        data.date = data.date.toLocaleDateString().toString();
         data.phone = `+${data.phone.replace(/\D*/g, '')}`;
-        data.registration = new Date().toLocaleDateString();
+        data.registration = new Date();
         this.addUser(data);
         const setFormData = new Promise((resolve) => {
           Object.keys(this.formData).forEach((key) => { this.formData[key] = ''; });
@@ -193,5 +190,16 @@ export default {
     position: absolute;
     top: 0;
     right: 30px;
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+    transform: translateX(-120%);
+    transition: all .8s;
+    position: absolute;
+  }
+  .fade-leave-active {
+    position: absolute;
+    opacity: .2;
   }
 </style>

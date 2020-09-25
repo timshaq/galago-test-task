@@ -126,7 +126,6 @@ export default {
     },
     currentPageNears() {
       if (this.page > 1 && this.page < this.pages) {
-        console.log('1');
         const nears = [];
         const per = this.page - 1;
         const current = this.page;
