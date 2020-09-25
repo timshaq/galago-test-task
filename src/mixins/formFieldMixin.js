@@ -2,7 +2,7 @@ import BaseFormField from '@/components/BaseFormField.vue';
 
 export default {
   components: { BaseFormField },
-  props: ['title', 'error', 'placeholder', 'value'],
+  props: ['title', 'error', 'placeholder', 'value', 'min'],
   computed: {
     dataValue: {
       get() {

@@ -28,7 +28,7 @@
          :options="[3, 5, 10]" />
 
          <BaseFormText v-model="formData.payment" title="Сумма взноса, руб."
-         type="number"
+         type="number" min="0"
          placeholder="Сумма" />
 
        </div>
