@@ -35,8 +35,22 @@
         :perPage="usersPerPage"
         :limit="limitPagination"
         />
-      </div>
+    </div>
+    <component :is="'style'" v-if="isIE10">
 
+      .headers__item {
+       display: flex !important;
+       justify-content: flex-start !important;
+       align-items: center !important;
+      }
+      .row__item, .headers__item {
+       width: 10% !important;
+      }
+      .header__btn-sort {
+       padding: 0 11% 0 0 !important;
+      }
+
+    </component>
   </section>
 </template>
 
@@ -81,21 +95,29 @@ export default {
       //     this.usersPerPage = 2;
       //     break;
       // }
-      // const vh = window.innerHeight;
-      // switch (true) {
-      //   case (vh >= 1080):
-      //     this.usersPerPage = 4;
-      //     break;
-      //   case (vh <= 1000):
-      //     this.usersPerPage = 3;
-      //     break;
-      //   default:
-      //     break;
-      // }
+      const vh = window.innerHeight;
+      switch (true) {
+        case (vh <= 740):
+          this.usersPerPage = 3;
+          break;
+        default:
+          this.usersPerPage = 4;
+          break;
+      }
     },
   },
   computed: {
     ...mapState(['users', 'sortButtons']),
+    isIE10() {
+      const agent = navigator.userAgent;
+      const reg = /MSIE ([^;]*)/;
+      const exec = reg.exec(agent);
+      if (exec) {
+        const ver = exec[1].split('.')[0];
+        return (+ver === 10);
+      }
+      return false;
+    },
     totalUsers() {
       return this.users.length;
     },
@@ -130,8 +152,14 @@ export default {
   border-radius: 50px;
   width: 90%;
   overflow: hidden;
-  width: 1732px;
-  height: 974px;
+  width: 90.2vw;
+  height: 90.2vh;
+  max-width: 1920px;
+  max-height: 1080px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
 .run {
   width: 100%;
@@ -179,21 +207,29 @@ export default {
   text-align: right;
   padding: 10px 70px;
 }
-@media (max-height: 1040px) {
+@media (max-width: 1919px), (max-height: 1079px) {
+
   .run-wrapper {
-    height: 88%;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+  .run {
+    padding: 2vh 0;
+  }
+  .run__row {
+    height: 32vh;
   }
   .run__title-img {
-    width: 350px;
+    height: 24vh;
   }
-}
-@media (max-width: 1919px), (max-height: 1079px) {
-  .run {
-    padding: 15px 0 0 0;
+  .run__title_h2 {
+    font-size: 18px;
+    height: 7vh;
   }
-  .run-wrapper {
-    width: 95%;
-    height: 95%;
+  .run__row-table {
+    height: 59vh;
+    padding-bottom: 18px;
   }
   .col__left {
     padding: 0 0 0 40px;
@@ -201,50 +237,50 @@ export default {
   .run__title_h1 {
     font-size: 25px;
   }
+  .form__submit, .form__submit:disabled {
+    margin-top: 15px;
+  }
+  .header__btn-sort:before, .header__btn-sort:after {
+    right: 0;
+  }
+}
+
+@media (max-width: 1439px), (max-height: 899px) {
+  .run__title-img {
+    display: none;
+  }
+  .run {
+    display: block;
+  }
   .run__row {
     flex-direction: column;
   }
-  .col__left, .col__right {
-    width: 100%;
-  }
   .run__form {
-    padding: 30px 0 0 0;
+    padding: 0;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
   }
+  .col__left, .col__right {
+    width: 100%;
+  }
   .run__form-row {
     width: 50%;
   }
-  .run__title-img {
-    display: none;
-  }
-  .run__form-container {
-    width: 100%;
-    height: fit-content;
-  }
-  .form__value, .form__input, .form__submit, .form__submit:disabled {
+  .row__item, .headers__item {
     font-size: 16px;
   }
-  .form__submit, .form__submit:disabled {
-    margin-top: 15px;
-  }
-  .run__title_h2 {
-    font-size: 18px;
-  }
-  .header__btn-sort:before, .header__btn-sort:after {
-    right: 0;
-  }
-  .row__item, .headers__item {
+  .form__value, .form__input, .form__submit, .form__submit:disabled {
     font-size: 16px;
   }
   .table__row {
     padding: 10px 0;
   }
-  .run__row-table {
+  .run__form-container {
+    width: 100%;
     height: fit-content;
-    padding-bottom: 18px;
   }
 }
+
 </style>

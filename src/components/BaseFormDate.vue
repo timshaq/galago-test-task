@@ -54,3 +54,8 @@ export default {
   },
 };
 </script>
+<style>
+  .vdp-datepicker {
+    width: 100%;
+  }
+</style>

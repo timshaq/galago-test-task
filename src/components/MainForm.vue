@@ -79,7 +79,9 @@ export default {
     sendForm() {
       if (!this.formError.email) {
         const data = { ...this.formData };
-        data.date = data.date.toLocaleDateString();
+        console.log('data.date');
+        console.log(data.date.toString());
+        data.date = data.date.toLocaleDateString().toString();
         data.phone = `+${data.phone.replace(/\D*/g, '')}`;
         data.registration = new Date().toLocaleDateString();
         this.addUser(data);
@@ -143,7 +145,7 @@ export default {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 33.333%;
+    width: 30.333%;
     margin: 0 10px;
     position: relative;
   }

@@ -32,8 +32,8 @@ export default {
 a:focus,a:active{outline: none;}
 nav,footer,header,aside{display: block;}
 html,body{
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   font-size: 100%;
   line-height: 1;
   font-size: 14px;
@@ -58,11 +58,6 @@ html,body {
   overflow-x: hidden;
   overflow-y: hidden;
   background: #FFBD00;
-}
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 /*    </BASE>    */
 </style>

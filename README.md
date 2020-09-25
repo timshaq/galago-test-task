@@ -56,6 +56,12 @@ Other minor edits.
 Layout change;
 Other minor edits.
 ```
+## 25.09.2020 — upd 0.0.9
+```
+Layout change;
+Added support of layout for IE10, IE11;
+Other minor edits.
+```
 ## Used packets (vue-components)
 ```
 vue-the-mask — ver. 0.11.1;

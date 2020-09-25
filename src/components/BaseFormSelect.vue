@@ -31,4 +31,7 @@ export default {
      -moz-appearance: none;
      appearance: none;
   }
+  .form__select::-ms-expand {
+    display: none;
+  }
 </style>
