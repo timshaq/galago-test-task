@@ -67,6 +67,10 @@ Other minor edits.
 Added animation;
 Other minor edits.
 ```
+## 30.09.2020 — upd 0.1.1
+```
+Added page's reset after sort.
+```
 ## Used packets (vue-components)
 ```
 vue-the-mask — ver. 0.11.1;

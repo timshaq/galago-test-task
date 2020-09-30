@@ -25,7 +25,7 @@
         <MainUsersTable
         :users="usersForTable"
         :buttons-table="this.sortButtons"
-        :sort-table="this.sortUsers"
+        :sort-table="this.getSort"
         />
 
         <AppPagination v-if="this.countUsers > this.usersPerPage"
@@ -79,9 +79,14 @@ export default {
       'sortUsers',
       'loadUsersFromStorage',
     ]),
+    getSort(sortId) {
+      this.sortUsers(sortId);
+      this.page = 1;
+    },
     addUserInTable(user) {
       this.addUser(user);
       this.updateSort();
+      this.page = 1;
     },
     updateUsersPerPage() {
       const vh = window.innerHeight;
