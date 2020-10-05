@@ -79,10 +79,13 @@ Added task description.
 ```
 </details>
 
-## Task description
+## Demo
+[Watch the demo](https://timshaq.github.io/galago-test-task/).
+
+### Task description
 Task description is available [here](public/тестовое%20задание%20на%20фронтенда.docx "тестовое задание на фронтенда.docx").
 
-## Used packets (vue-components)
+### Used packets (vue-components)
 ```
 vue-the-mask — ver. 0.11.1;
 vuejs-datepicker — ver. 1.6.2.
