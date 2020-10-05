@@ -1,4 +1,5 @@
 # galago-test-task
+<details><summary>Change history</summary>
 
 ## 17.09.2020 — start
 ```
@@ -76,10 +77,11 @@ Added page's reset after sort.
 Deleted default property "options";
 Added task description.
 ```
+</details>
+
 ## Task description
-```
-Task description is available [here](https://github.com/timshaq/galago-test-task/blob/master/public/%D1%82%D0%B5%D1%81%D1%82%D0%BE%D0%B2%D0%BE%D0%B5%20%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BD%D0%B0%20%D1%84%D1%80%D0%BE%D0%BD%D1%82%D0%B5%D0%BD%D0%B4%D0%B0.docx/ "тестовое задание на фронтенда.docx").
-```
+Task description is available [here](public/тестовое%20задание%20на%20фронтенда.docx "тестовое задание на фронтенда.docx").
+
 ## Used packets (vue-components)
 ```
 vue-the-mask — ver. 0.11.1;
