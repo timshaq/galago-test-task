@@ -71,6 +71,11 @@ Other minor edits.
 ```
 Added page's reset after sort.
 ```
+## 05.09.2020 — upd 0.1.2
+```
+Deleted default property "options";
+Added task description.
+```
 ## Used packets (vue-components)
 ```
 vue-the-mask — ver. 0.11.1;

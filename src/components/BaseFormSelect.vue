@@ -16,11 +16,7 @@
 import formFieldMixin from '@/mixins/formFieldMixin';
 
 export default {
-  props: {
-    options: {
-      default: () => [1, 2, 3],
-    },
-  },
+  props: ['options'],
   mixins: [formFieldMixin],
 };
 </script>
