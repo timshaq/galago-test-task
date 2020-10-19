@@ -28,7 +28,7 @@
         :sort-table="this.getSort"
         />
 
-        <AppPagination v-if="this.countUsers > this.usersPerPage"
+        <MainPagination v-if="this.countUsers > this.usersPerPage"
         v-model='page'
         :page="page"
         :count="countUsers"
@@ -55,9 +55,9 @@
 </template>
 
 <script>
-import MainUsersTable from '@/components/MainUsersTable.vue';
-import AppPagination from '@/components/AppPagination.vue';
 import MainForm from '@/components/MainForm.vue';
+import MainUsersTable from '@/components/MainUsersTable.vue';
+import MainPagination from '@/components/MainPagination.vue';
 import { mapState, mapActions } from 'vuex';
 import usersDeclension from '@/helpers/usersDeclension';
 
@@ -128,7 +128,7 @@ export default {
   components: {
     MainUsersTable,
     MainForm,
-    AppPagination,
+    MainPagination,
   },
   created() {
     this.loadUsersFromStorage();

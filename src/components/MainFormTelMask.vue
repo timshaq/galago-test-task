@@ -1,12 +1,9 @@
 <template>
   <label class="form__label input__tel">
     <span class="form__value">{{ title }}</span>
-      <span v-show="currentMask.content" class="flags-font">
-        {{ currentMask.content }}
-      </span>
-
+      <span v-show="this.error" class="form__error">❌</span>
       <input type="tel" class="form__input"
-      v-mask="currentMask.mask"
+      v-mask="telMask.mask"
       :placeholder="placeholder"
       v-model="dataValue"
       @focus="onFocus"
@@ -17,42 +14,38 @@
 
 <script>
 import { mask } from 'vue-the-mask';
-import { defaultMask, maskData } from '@/data/telMask';
+import PNF from 'google-libphonenumber';
 
 export default {
   name: 'BaseFormTel',
-  props: ['title', 'placeholder', 'value'],
+  props: ['title', 'placeholder', 'value', 'error'],
   directives: { mask },
   data() {
     return {
       focus: false,
-      currentMask: defaultMask,
-      maskData,
+      telMask: {
+        id: '',
+        mask: '+7 (###) ###-##-##',
+        placeholder: 'Номер телефона',
+        pattern: /\d\d\d\d\d\d\d\d\d/,
+      },
     };
   },
   methods: {
-    findMask() {
-      if (this.dataValue) {
-        const findMask = this.maskData
-          .filter((item) => item.code_pattern.test(this.dataValue))[0];
-        if (findMask) this.currentMask = findMask;
-      } else {
-        this.currentMask = defaultMask;
-      }
-    },
     onFocus() {
       this.focus = true;
     },
     onBlur() {
+      const phoneUtil = PNF.PhoneNumberUtil.getInstance();
       this.focus = false;
       const numbers = this.dataValue.replace(/\D*/g, '');
-      const { pattern } = this.currentMask;
-      const test = pattern.test(numbers);
-      if (!test) {
-        this.$emit('input', '');
-        this.currentMask = defaultMask;
+      const testGoogle = phoneUtil.isValidNumber(phoneUtil.parse(numbers, 'RU'));
+      if (!testGoogle) {
+        this.$emit('input', this.dataValue);
+        this.$emit('update:error', true);
       } else {
         this.$emit('input', numbers);
+        this.$emit('update:error', false);
       }
     },
   },
@@ -66,21 +59,10 @@ export default {
       },
     },
   },
-  watch: {
-    dataValue() {
-      this.findMask();
-    },
-  },
 };
 </script>
 <style media="screen">
   .input__tel {
     position: relative;
-  }
-  .flags-font {
-    font-family: 'BabelStoneFlagsDual';
-    position: absolute;
-    top: 0;
-    right: 30px;
   }
 </style>

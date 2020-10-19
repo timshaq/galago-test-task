@@ -2,34 +2,57 @@
   <div class="run__form-container">
      <form class="run__form" @submit.prevent="sendForm">
 
-       <BaseFormText v-model="formData.registration" type="hidden" class="hidden" />
-
+       <input type="hidden" class="hidden" v-model="formData.registration">
        <div class="run__form-row">
 
-         <BaseFormText v-model="formData.name" title="ФИО"
-         placeholder="Ваше имя" />
+         <label class="form__label">
+          <span class="form__value">
+           ФИО
+          </span>
+          <input class="form__input" placeholder="Ваше имя"
+          v-model="formData.name"/>
+         </label>
 
-         <BaseFormDate v-model="formData.date" title="Дата рождения"
+         <MainFormCalendar v-model="formData.date" title="Дата рождения"
          placeholder="11.03.1998" />
 
-         <BaseFormText v-model="formData.email" title="Email"
-         :error="formError.email"
-         placeholder="Email" />
+         <label class="form__label">
+          <span class="form__value">
+           Email
+          </span>
+          <span v-show="formError.email" class="form__error">❌</span>
+          <input class="form__input" placeholder="Email"
+          v-model="formData.email"/>
+         </label>
 
        </div>
 
        <div class="run__form-row">
 
-         <BaseFormTel v-model="formData.phone" title="Телефон"
+         <MainFormTelMask v-model="formData.phone" :error.sync="formError.phone" title="Телефон"
          placeholder="Номер телефона"/>
 
-         <BaseFormSelect v-model="formData.distance" title="Дистанция, км"
-         placeholder="Выберите дистанцию"
-         :options="[3, 5, 10]" />
+         <label class="form__label">
+          <span class="form__value">
+           Дистанция, км
+          </span>
+          <select class="form__input form__select" type="number" min="0"
+          placeholder="Выберите дистанцию"
+          v-model="formData.distance">
+          <option disabled value="">Выберите дистанцию</option>
+          <option value="3">3</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          </select>
+         </label>
 
-         <BaseFormText v-model="formData.payment" title="Сумма взноса, руб."
-         type="number" min="0"
-         placeholder="Сумма" />
+         <label class="form__label">
+          <span class="form__value">
+           Сумма взноса, руб.
+          </span>
+          <input class="form__input" type="number" min="0" placeholder="Сумма"
+          v-model="formData.payment"/>
+         </label>
 
        </div>
 
@@ -47,10 +70,8 @@
 </template>
 
 <script>
-import BaseFormText from '@/components/BaseFormText.vue';
-import BaseFormSelect from '@/components/BaseFormSelect.vue';
-import BaseFormDate from '@/components/BaseFormDate.vue';
-import BaseFormTel from '@/components/BaseFormTel.vue';
+import MainFormCalendar from '@/components/MainFormCalendar.vue';
+import MainFormTelMask from '@/components/MainFormTelMask.vue';
 import validMail from '@/helpers/validMail';
 
 export default {
@@ -70,10 +91,8 @@ export default {
   },
   props: ['addUser'],
   components: {
-    BaseFormText,
-    BaseFormSelect,
-    BaseFormDate,
-    BaseFormTel,
+    MainFormCalendar,
+    MainFormTelMask,
   },
   methods: {
     sendForm() {
@@ -97,7 +116,7 @@ export default {
   computed: {
     buttonIsDisabled() {
       const nullItems = this.formDataItems.filter((item) => item.length === 0);
-      return Boolean(nullItems.length || this.formError.email);
+      return Boolean(nullItems.length || this.formError.email || this.formError.phone);
     },
     formDataItems() {
       return Object.keys(this.formData).map((key) => this.formData[key]);
